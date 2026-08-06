@@ -1,0 +1,235 @@
+/* ============================================================
+   Animatsiyalar — agent panelining harakat tili.
+   Barchasi prefers-reduced-motion ostida o'chiriladi (fayl oxirida).
+   ============================================================ */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  60% {
+    transform: scale(1.015);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 var(--teal-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes girih-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 108px 108px, -108px 108px;
+  }
+}
+
+/* --- kirish animatsiyasi: bolalarni navbat bilan ko'rsatadi --- */
+.stagger > * {
+  animation: rise var(--dur-3) var(--ease-out) both;
+}
+.stagger > *:nth-child(1) {
+  animation-delay: 0.02s;
+}
+.stagger > *:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.stagger > *:nth-child(3) {
+  animation-delay: 0.1s;
+}
+.stagger > *:nth-child(4) {
+  animation-delay: 0.14s;
+}
+.stagger > *:nth-child(5) {
+  animation-delay: 0.18s;
+}
+.stagger > *:nth-child(6) {
+  animation-delay: 0.22s;
+}
+.stagger > *:nth-child(7) {
+  animation-delay: 0.26s;
+}
+.stagger > *:nth-child(8) {
+  animation-delay: 0.3s;
+}
+.stagger > *:nth-child(n + 9) {
+  animation-delay: 0.34s;
+}
+
+.anim-rise {
+  animation: rise var(--dur-3) var(--ease-out) both;
+}
+.anim-fade {
+  animation: fade var(--dur-3) var(--ease-out) both;
+}
+.anim-pop {
+  animation: pop var(--dur-2) var(--ease-out) both;
+}
+
+/* --- sahifa almashinuvi --- */
+.page-enter-active {
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.page-leave-active {
+  transition:
+    opacity 0.12s var(--ease-in-out),
+    transform 0.12s var(--ease-in-out);
+  position: absolute;
+  inset: 0;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* --- ro'yxat elementlari (jadval satrlari, kartalar) --- */
+.list-enter-active,
+.list-leave-active {
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.list-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: scale(0.97);
+}
+.list-move {
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+/* --- yon panel (drawer) --- */
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.drawer-enter-from,
+.drawer-leave-to {
+  transform: translateX(100%);
+}
+.veil-enter-active,
+.veil-leave-active {
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.veil-enter-from,
+.veil-leave-to {
+  opacity: 0;
+}
+
+/* --- toast --- */
+.toast-enter-active,
+.toast-leave-active {
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.toast-enter-from {
+  opacity: 0;
+  transform: translateY(14px) scale(0.96);
+}
+.toast-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.toast-move {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+/* --- skeleton yuklanish --- */
+.sk {
+  background: var(--skeleton);
+  background-size: 200% 100%;
+  animation: shimmer 1.25s linear infinite;
+  border-radius: var(--r-s);
+}
+
+/* --- spinner --- */
+.spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

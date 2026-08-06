@@ -1,0 +1,106 @@
+/* ============================================================
+   Uyimiz dizayn tokenlari
+   Qiymatlar to'g'ridan-to'g'ri dizayn taxtasining ikki variantidan olingan:
+     - uyimiz-figma-board_2.html   -> dark  (sukut bo'yicha)
+     - uyimiz-figma-board-oq.html  -> light
+   Mavzu <html data-theme="..."> orqali almashtiriladi.
+   ============================================================ */
+
+:root,
+:root[data-theme='dark'] {
+  --canvas: #0f1216;
+  --frame: #171b21;
+  --surface: #1e232b;
+  --surface-2: #262c36;
+  --line: #2e3540;
+  --line-soft: #242a33;
+  --text: #eceff3;
+  --text-2: #a2acba;
+  --text-3: #6c7684;
+  --teal: #2fc7b4;
+  --teal-deep: #1b7f76;
+  --teal-glow: rgba(47, 199, 180, 0.14);
+  --brass: #d9a441;
+  --brass-glow: rgba(217, 164, 65, 0.12);
+  --rose: #e5675a;
+  --rose-glow: rgba(229, 103, 90, 0.13);
+  --label: #7ba7ff;
+
+  /* mavzuga bog'liq yordamchi qiymatlar */
+  --on-teal: #06120f;
+  --on-brass: #1b1405;
+  --hairline: rgba(255, 255, 255, 0.07);
+  --topbar-bg: rgba(15, 18, 22, 0.88);
+  --nav-bg: #12161b;
+  --shadow-card: 0 18px 40px -28px rgba(0, 0, 0, 0.9);
+  --shadow-pop: 0 26px 60px -24px rgba(0, 0, 0, 0.85);
+  --ph-a: #232a33;
+  --ph-b: #1a2027;
+  --ph-stripe: rgba(255, 255, 255, 0.035);
+  --ph-label: rgba(255, 255, 255, 0.28);
+  --skeleton: linear-gradient(90deg, #1e232b 25%, #262c36 37%, #1e232b 63%);
+  --ava-to: #2b3540;
+  --ava-text: #dff7f3;
+  --paper: #f6f5f1;
+  --paper-ink: #22262b;
+}
+
+:root[data-theme='light'] {
+  --canvas: #f7f8fa;
+  --frame: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #eef1f4;
+  --line: #dde2e8;
+  --line-soft: #e8ecf0;
+  --text: #181c22;
+  --text-2: #565f6b;
+  --text-3: #8992a0;
+  --teal: #189889;
+  --teal-deep: #0e6a60;
+  --teal-glow: rgba(24, 152, 137, 0.1);
+  --brass: #a9761f;
+  --brass-glow: rgba(169, 118, 31, 0.12);
+  --rose: #c43f31;
+  --rose-glow: rgba(196, 63, 49, 0.11);
+  --label: #3568db;
+
+  /* Taxtadagi .btn-pri / .btn-brass ikkala mavzuda ham to'q matndan foydalanadi —
+     bu yorug' mavzuda oq matndan ko'ra kontrastliroq chiqadi. */
+  --on-teal: #06120f;
+  --on-brass: #1b1405;
+  --hairline: rgba(0, 0, 0, 0.1);
+  --topbar-bg: rgba(255, 255, 255, 0.85);
+  --nav-bg: #eef1f4;
+  --shadow-card: 0 18px 40px -30px rgba(20, 30, 45, 0.35);
+  --shadow-pop: 0 26px 60px -26px rgba(20, 30, 45, 0.28);
+  --ph-a: #eef1f4;
+  --ph-b: #e3e7ec;
+  --ph-stripe: rgba(0, 0, 0, 0.03);
+  --ph-label: rgba(0, 0, 0, 0.32);
+  --skeleton: linear-gradient(90deg, #eef1f4 25%, #f7f9fb 37%, #eef1f4 63%);
+  --ava-to: #274049;
+  --ava-text: #eafffb;
+  --paper: #f6f5f1;
+  --paper-ink: #22262b;
+}
+
+:root {
+  --r-s: 8px;
+  --r-m: 12px;
+  --r-l: 18px;
+  --r-xl: 26px;
+
+  --f-display: 'Bricolage Grotesque', Georgia, serif;
+  --f-body: 'Manrope', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* harakat */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 0.14s;
+  --dur-2: 0.24s;
+  --dur-3: 0.42s;
+
+  --rail-w: 232px;
+  --topbar-h: 60px;
+}

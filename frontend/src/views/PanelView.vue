@@ -64,7 +64,7 @@ onMounted(load)
 <template>
   <div>
     <PageHead
-      :title="`${greeting}, ${data?.agent.full_name.split(' ')[0] ?? ''}`"
+      :title="`${greeting}, ${data?.agent.name.split(' ')[0] ?? ''}`"
       :note="data?.greeting_note"
       eyebrow="Panel"
     >

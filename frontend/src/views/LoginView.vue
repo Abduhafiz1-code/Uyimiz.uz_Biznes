@@ -21,7 +21,7 @@ async function submit() {
   busy.value = true
   try {
     await auth.login(phone.value.trim(), password.value)
-    toast.ok(`Xush kelibsiz, ${auth.agent?.full_name ?? 'agent'}`)
+    toast.ok(`Xush kelibsiz, ${auth.agent?.name ?? 'agent'}`)
     router.replace({ name: 'panel' })
   } catch (e: any) {
     error.value = e?.response?.data?.detail ?? 'Kirishda xatolik yuz berdi'

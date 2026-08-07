@@ -115,7 +115,7 @@ onMounted(() => {
         <RouterLink v-if="agent" to="/reyting" class="me">
           <span class="ava ava-sm">{{ agent.initials }}</span>
           <span class="me-txt">
-            <b>{{ agent.full_name }}</b>
+            <b>{{ agent.name }}</b>
             <small>{{ agent.district }} · {{ agent.tier }}</small>
           </span>
         </RouterLink>

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import api, { TOKEN_KEY } from '@/api/client'
+import { authApi, TOKEN_KEY } from '@/api/client'
 import type { Agent } from '@/types'
 
 export const useAuthStore = defineStore('auth', {
@@ -14,15 +14,18 @@ export const useAuthStore = defineStore('auth', {
   },
   actions: {
     async login(phone: string, password: string) {
-      const { data } = await api.post('/auth/login/', { phone, password })
+      const { data } = await authApi.post('/login/', { phone, password })
+      if (data.role !== 'agent') {
+        throw new Error('Bu login Uyimiz Agent panel uchun emas')
+      }
       this.token = data.token
-      this.agent = data.agent
+      this.agent = data.user
       localStorage.setItem(TOKEN_KEY, data.token)
     },
     async fetchMe() {
       if (!this.token) return
       try {
-        const { data } = await api.get('/auth/me/')
+        const { data } = await authApi.get('/me/')
         this.agent = data
       } catch {
         this.clear()
@@ -30,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       try {
-        await api.post('/auth/logout/')
+        await authApi.post('/logout/')
       } catch {
         /* tarmoq xatosi chiqishga to'sqinlik qilmasin */
       }

@@ -1,23 +1,25 @@
 # Uyimiz Agent — CRM
 
-Dizayn taxtasining **07-freymi** (`Uyimiz Agent — CRM`) asosida qurilgan to'liq stack ilova.
-Faqat **agent CRM** qismi — admin panel (11-freym) bu loyihaga kirmaydi.
+Dizayn taxtasining **07-freymi** (`Uyimiz Agent — CRM`) asosida qurilgan frontend.
+Faqat **agent CRM** ekranlari — admin panel (11-freym, `Uyimiz.uz_Admin`) bu loyihaga kirmaydi.
+
+Bu frontend o'zining backendiga ega emas — loyihaning yagona backendi,
+**`../uyimiz-backend`** (Django 6 + DRF, token autentifikatsiya) ga ulanadi. Xuddi shu
+backendga mobil ilova va admin panel ham ulanadi — bitta manzillar jadvali, bitta baza.
 
 - **Frontend:** Vue 3 + TypeScript + Vite + Pinia + Vue Router
-- **Backend:** Django 6 + Django REST Framework (token autentifikatsiya)
 
 ---
 
 ## Ishga tushirish
 
-### 1. Backend
+### 1. Backend (repo ildizidagi `uyimiz-backend/`)
 
 ```bash
-cd backend
+cd ../uyimiz-backend
 python -m venv venv
 venv/Scripts/pip install -r requirements.txt
 venv/Scripts/python manage.py migrate
-venv/Scripts/python manage.py seed_demo
 venv/Scripts/python manage.py runserver
 ```
 
@@ -45,11 +47,9 @@ Sayt: <http://localhost:5174> · API: <http://localhost:8000/api/>
 
 ### Demo hisob
 
-```
-+998901234567 / uyimiz2026
-```
-
-Demo ma'lumotni qaytadan yaratish: `manage.py seed_demo --reset`
+`uyimiz-backend` da `role=agent` bilan yaratilgan har qanday foydalanuvchi shu panelga
+kira oladi (telefon + parol). Django admin panel (`/admin/`) yoki `manage.py shell` orqali
+test agent yarating.
 
 ---
 
@@ -106,19 +106,19 @@ tizim sozlamasi (`prefers-color-scheme`) olinadi.
 
 ## API
 
-| Metod       | Manzil                       | Vazifa                                  |
-| ----------- | ---------------------------- | --------------------------------------- |
-| POST        | `/api/auth/login/`           | Token olish                             |
-| POST        | `/api/auth/logout/`          | Tokenni bekor qilish                    |
-| GET / PATCH | `/api/auth/me/`              | Agent profili                           |
-| GET         | `/api/dashboard/`            | KPI, yangi mijozlar, voronka, faollik   |
-| GET         | `/api/rating/`               | Reyting, daraja, agentlar jadvali       |
-| CRUD        | `/api/clients/`              | Mijozlar                                |
-| POST        | `/api/clients/<id>/status/`  | Mijoz holatini o'zgartirish             |
-| CRUD        | `/api/properties/`           | Obyektlar                               |
-| CRUD        | `/api/deals/`                | Bitimlar (bosqich o'zgarishi bilan)     |
-| CRUD        | `/api/showings/`             | Ko'rsatuvlar                            |
-| CRUD        | `/api/activities/`           | Faollik tasmasi                         |
+| Metod       | Manzil                           | Vazifa                                  |
+| ----------- | --------------------------------- | --------------------------------------- |
+| POST        | `/api/auth/login/`               | Token olish                             |
+| POST        | `/api/auth/logout/`              | Tokenni bekor qilish                    |
+| GET / PATCH | `/api/auth/me/`                  | Agent profili                           |
+| GET         | `/api/crm/dashboard/`            | KPI, yangi mijozlar, voronka, faollik   |
+| GET         | `/api/crm/rating/`               | Reyting, daraja, agentlar jadvali       |
+| CRUD        | `/api/crm/clients/`              | Mijozlar                                |
+| POST        | `/api/crm/clients/<id>/status/`  | Mijoz holatini o'zgartirish             |
+| CRUD        | `/api/crm/properties/`           | Obyektlar                               |
+| CRUD        | `/api/crm/deals/`                | Bitimlar (bosqich o'zgarishi bilan)     |
+| CRUD        | `/api/crm/showings/`             | Ko'rsatuvlar                            |
+| CRUD        | `/api/crm/activities/`           | Faollik tasmasi                         |
 
 Har bir yozuv faqat o'z agentiga ko'rinadi (`AgentScopedViewSet`).
 

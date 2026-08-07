@@ -1,7 +1,7 @@
 export interface Agent {
   id: number
   phone: string
-  full_name: string
+  name: string
   email: string
   district: string
   initials: string
@@ -12,7 +12,7 @@ export interface Agent {
   commission_rate: string
   avg_response_minutes: number
   total_deals: number
-  joined_at: string
+  date_joined: string
   tier_percent: number
   tier_remaining: number
   tier_next_label: string | null

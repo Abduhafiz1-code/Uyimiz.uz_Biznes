@@ -65,7 +65,7 @@ onMounted(load)
           <span class="ava big">{{ data.agent.initials }}</span>
           <div>
             <div class="h-disp score">{{ String(data.agent.rating).replace('.', ',') }} <span>★</span></div>
-            <p class="muted">{{ data.agent.full_name }} · {{ data.agent.district }}</p>
+            <p class="muted">{{ data.agent.name }} · {{ data.agent.district }}</p>
             <div class="stack" style="margin-top: 10px">
               <span class="pill pill-ok"><UiIcon name="i-shield" :size="11" />{{ data.agent.certification }}</span>
               <span class="pill">{{ data.agent.tier }}</span>

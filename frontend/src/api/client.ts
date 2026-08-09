@@ -5,10 +5,17 @@ export const TOKEN_KEY = "uyimiz_agent_token";
 // uyimiz-backend (yagona Django backend): Agent CRM resurslari /api/crm/... ostida,
 // login/me/logout esa umumiy /api/auth/... da (barcha rollar uchun bitta login).
 //
-// VITE_API_BASE — backendning ildiz manzili. Dev'da bo'sh qoldiriladi va
-// vite.config.ts dagi proxy 127.0.0.1:8000 ga yo'naltiradi; prod'da
-// https://uyimiz-backend.onrender.com qiymati beriladi.
-const ROOT = (import.meta.env.VITE_API_BASE || "").replace(/\/+$/, "");
+// Backend manzili.
+//   • dev        → bo'sh: vite proxy 127.0.0.1:8000 ga uzatadi
+//   • production → Render'dagi backend
+// VITE_API_BASE berilsa, u ustun turadi.
+const PROD_API_BASE = "https://uyimiz-backend.onrender.com";
+
+const ROOT: string = (() => {
+  const fromEnv = (import.meta.env.VITE_API_BASE || "").trim().replace(/\/+$/, "");
+  if (fromEnv) return fromEnv;
+  return import.meta.env.PROD ? PROD_API_BASE : "";
+})();
 
 export const API_ROOT = ROOT;
 

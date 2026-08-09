@@ -12,6 +12,14 @@ const router = createRouter({
       meta: { public: true, title: 'Kirish' },
     },
     {
+      // Agent bo'lish uchun ariza. Kirgan, lekin hali tasdiqlanmagan
+      // foydalanuvchilar shu yerga yo'naltiriladi.
+      path: '/ariza',
+      name: 'apply',
+      component: () => import('@/views/ApplyView.vue'),
+      meta: { public: true, title: 'Agent bo‘lish' },
+    },
+    {
       path: '/',
       component: () => import('@/components/CrmLayout.vue'),
       children: [
@@ -66,10 +74,24 @@ const router = createRouter({
   scrollBehavior: () => ({ top: 0 }),
 })
 
-router.beforeEach((to) => {
+router.beforeEach(async (to) => {
   const auth = useAuthStore()
+
+  // Kirmagan bo'lsa — login sahifasi.
   if (!to.meta.public && !auth.isAuthenticated) return { name: 'login' }
-  if (to.name === 'login' && auth.isAuthenticated) return { name: 'panel' }
+
+  if (auth.isAuthenticated) {
+    // Sahifa yangilangandan keyin rol/holat bo'sh bo'lishi mumkin —
+    // CRM sahifalariga o'tishdan oldin backenddan tekshiramiz.
+    if (!auth.role) await auth.refreshStatus()
+
+    // Tasdiqlanmagan agent (yoki umuman agent bo'lmagan) CRM'ga kirmasin.
+    if (!to.meta.public && !auth.canEnterCrm) return { name: 'apply' }
+
+    if (to.name === 'login') return auth.canEnterCrm ? { name: 'panel' } : { name: 'apply' }
+    if (to.name === 'apply' && auth.canEnterCrm) return { name: 'panel' }
+  }
+
   return true
 })
 
